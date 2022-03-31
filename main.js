@@ -13,3 +13,23 @@ const findMatches = (match, cities) => {
     return place.city.match(regex) || place.state.match(regex)
   }))
 }
+
+function displayMatches() {
+  const match = findMatches(this.value, cities)
+  const result = match.map((place) => {
+    const regex = new RegExp(this.value, 'gi')
+    const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
+    return `
+    <li>
+    <span class='name'>${cityName}, ${place.state}</span>
+    <span class='population'>${place.population}</span>
+    </li>`
+  }).join('')
+  suggestions.innerHTML = result
+}
+
+const inputSearch = document.querySelector('.search')
+const suggestions = document.querySelector('.suggestions')
+
+inputSearch.addEventListener('change', displayMatches)
+inputSearch.addEventListener('keyup', displayMatches)
