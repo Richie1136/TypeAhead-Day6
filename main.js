@@ -19,9 +19,11 @@ function displayMatches() {
   const result = match.map((place) => {
     const regex = new RegExp(this.value, 'gi')
     const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
+    const stateName = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
+
     return `
     <li>
-    <span class='name'>${cityName}, ${place.state}</span>
+    <span class='name'>${cityName}, ${stateName}</span>
     <span class='population'>${place.population}</span>
     </li>`
   }).join('')
